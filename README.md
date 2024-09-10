@@ -78,14 +78,6 @@ curl -X POST http://127.0.0.1:8000/api/parse_resume/ -F "resume=@path/to/resume.
 }
 ```
 
-## Contributing
-
-Feel free to submit issues or pull requests if you find bugs or want to add new features. For detailed guidelines, please refer to the [CONTRIBUTING.md](CONTRIBUTING.md) file.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ## Acknowledgments
 
 - [Django](https://www.djangoproject.com/) - The web framework used
