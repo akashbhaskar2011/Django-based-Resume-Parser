@@ -24,7 +24,7 @@ A Django-based Resume Parser application that extracts key details from resumes,
 
    ```bash
    git clone https://github.com/akashbhaskar2011/Django-based-Resume-Parser.git
-   cd Django-based-Resume-Parser
+
    ```
 
 2. **Create a Virtual Environment**
