@@ -1,6 +1,3 @@
-Certainly! Here’s a sample `README.md` for your Django-based Resume Parser project. You can customize it according to your needs:
-
----
 
 # Django-based Resume Parser
 
