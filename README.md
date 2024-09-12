@@ -13,7 +13,7 @@ A Django-based Resume Parser application that extracts key details from resumes,
 
 ### Prerequisites
 
-- Python 3.8 or higher
+- Python 3.8, 3.9 (Recommended)
 - Django 3.x or higher
 - Django REST Framework
 - Other dependencies listed in `requirements.txt`
@@ -24,37 +24,90 @@ A Django-based Resume Parser application that extracts key details from resumes,
 
    ```bash
    git clone https://github.com/akashbhaskar2011/Django-based-Resume-Parser.git
-
    ```
 
 2. **Create a Virtual Environment**
 
+   It's recommended to use Python 3.8 or 3.9 due to compatibility issues with certain packages in Python 3.12.
+
+   If Python 3.9 is not installed, you can install it using Homebrew (on macOS):
+
    ```bash
-   python -m venv venv
+   brew install python@3.9
+   ```
+
+   Then create and activate the virtual environment:
+
+   ```bash
+   python3.9 -m venv venv
    source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
    ```
 
-3. **Install Dependencies**
+3. **Upgrade pip, setuptools, and wheel**
+
+   To ensure compatibility with the dependencies:
+
+   ```bash
+   pip install --upgrade pip setuptools wheel
+   ```
+
+4. **Install Dependencies**
 
    ```bash
    pip install -r requirements.txt
    ```
 
-4. **Apply Migrations**
+5. **Apply Migrations**
 
    ```bash
    python manage.py migrate
    ```
 
-5. **Run the Development Server**
+6. **Run the Development Server**
 
    ```bash
    python manage.py runserver
    ```
 
-6. **Access the API**
+7. **Access the API**
 
    Open your browser and navigate to `http://127.0.0.1:8000/api/parse_resume/` to access the resume parsing endpoint.
+
+## Additional Steps for Python 3.12 Users
+
+If you're using Python 3.12, some packages may have compatibility issues. Follow these additional steps:
+
+1. **Manually Update `setuptools` and `wheel`**
+
+   ```bash
+   pip install --upgrade setuptools wheel
+   ```
+
+2. **Install `numpy` Separately**
+
+   Sometimes installing `numpy` separately can resolve issues:
+
+   ```bash
+   pip install numpy==1.23.5
+   ```
+
+   Then install the remaining dependencies:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. **Recreate the Virtual Environment** (if needed)
+
+   If the above steps don’t resolve the issues, try recreating the virtual environment:
+
+   ```bash
+   rm -rf venv
+   python3.9 -m venv venv
+   source venv/bin/activate
+   pip install --upgrade pip setuptools wheel
+   pip install -r requirements.txt
+   ```
 
 ## Usage
 
@@ -86,4 +139,4 @@ curl -X POST http://127.0.0.1:8000/api/parse_resume/ -F "resume=@path/to/resume.
 
 ---
 
-Feel free to adjust this `README.md` to better fit the specifics of your project or add any additional sections as needed.
+This should now help in resolving potential issues when using newer versions of Python. Let me know if any further changes are needed!
