@@ -6,6 +6,10 @@ from rest_framework import status
 from .utils import parse_resume
 from django.core.files.storage import default_storage
 import os
+from django.shortcuts import redirect
+import csv
+from django.http import HttpResponse
+from .models import Candidate
 
 class ResumeExtractorView(APIView):
 
@@ -36,3 +40,39 @@ class ResumeExtractorView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+def resume_list(request):
+    query = request.GET.get('search')
+    if query:
+        resumes = Candidate.objects.filter(name__icontains=query) | Resume.objects.filter(email__icontains=query)
+    else:
+        resumes = Candidate.objects.all()
+    return render(request, 'resume_list.html', {'resumes': resumes})
+
+
+def download_resumes_csv(request):
+    resumes = Candidate.objects.all()
+    
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="resumes.csv"'
+
+    writer = csv.writer(response)
+    writer.writerow(['first_name', 'email', 'mobile_number'])
+
+    for resume in resumes:
+        writer.writerow([resume.first_name, resume.email, resume.mobile_number])
+
+    return response
+
+
+def resume_detail(request, resume_id):
+    resume = Candidate.objects.get(id=resume_id)
+    return render(request, 'resume_detail.html', {'resume': resume})
+
+
+def delete_resume(request, resume_id):
+    resume = Candidate.objects.get(id=resume_id)
+    resume.delete()
+    return redirect('resume_list')

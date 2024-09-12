@@ -1,0 +1,18 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resume Details</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/resume_details.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Resume of {{ resume.first_name }}</h1>
+        <p><strong>Email:</strong> {{ resume.email }}</p>
+        <p><strong>Phone:</strong> {{ resume.mobile_number }}</p>
+        {% comment %} <p><strong>Skills:</strong> {{ resume.skills }}</p> {% endcomment %}
+        {% comment %} <p><strong>Experience:</strong> {{ resume.experience }}</p> {% endcomment %}
+        <a href="{% url 'resume_list' %}">Back to Resume List</a>
+    </div>
+</body>
+</html>

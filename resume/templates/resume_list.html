@@ -1,0 +1,40 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resume List</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <h1>Resumes</h1>
+    <div class="container">
+        <form method="GET" action="{% url 'resume_list' %}">
+            <input type="text" name="search" placeholder="Search by name or email">
+            <button type="submit">Search</button>
+        </form>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Actions</th>
+            </tr>
+            {% for resume in resumes %}
+            <tr>
+                <td>{{ resume.first_name }}</td>
+                <td>{{ resume.email }}</td>
+                <td>{{ resume.mobile_number }}</td>
+                <td class="actions">
+                    <a href="{% url 'resume_detail' resume.id %}">View Details</a> |
+                    <a href="{% url 'delete_resume' resume.id %}">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <div class="download">
+            <a href="{% url 'download_resumes' %}">Download Resumes as CSV</a>
+        </div>
+    </div>
+</body>
+</html>
